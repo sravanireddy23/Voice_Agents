@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Day 6: Transcribe Your Voice</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🎤 Voice Transcription Bot</h1>
+    <div class="recorder">
+      <button id="startBtn">Start Recording</button>
+      <button id="stopBtn" disabled>Stop Recording</button>
+      <p id="status">Click start to record.</p>
+    </div>
+
+    <audio id="audioPlayer" controls></audio>
+    
+    <div class="transcription">
+      <button id="transcribeBtn">Transcribe</button>
+      <p id="transcriptText">Transcript will appear here...</p>
+    </div>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
