@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Echo Bot v2 - Your Voice & Murf Voice</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>🎙 Echo Bot v2</h1>
+    <p>Record your voice and hear both your original voice and Murf's version.</p>
+    
+    <button id="startBtn">Start Recording</button>
+    <button id="stopBtn" disabled>Stop Recording</button>
+    <p id="status"></p>
+
+    <div class="audio-container" id="audioContainer">
+        <div>
+            <h3>Your Original Voice</h3>
+            <audio id="originalAudio" controls></audio>
+        </div>
+        <div>
+            <h3>Murf Voice</h3>
+            <audio id="murfAudio" controls></audio>
+        </div>
+        <p><strong>Transcription:</strong> <span id="transcriptionText">---</span></p>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
