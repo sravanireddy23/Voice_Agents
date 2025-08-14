@@ -1,0 +1,107 @@
+/* Background */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  height: 100vh;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Chat container */
+.chat-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 20px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Title */
+.title {
+  color: white;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* Chat history area */
+.chat-history {
+  width: 100%;
+  height: 300px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 10px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.chat-message {
+  padding: 8px 12px;
+  margin: 5px 0;
+  border-radius: 12px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.chat-message.user {
+  background: #ff4e50;
+  color: white;
+  align-self: flex-end;
+}
+
+.chat-message.assistant {
+  background: #4cafef;
+  color: white;
+  align-self: flex-start;
+}
+
+/* Status text */
+.status {
+  color: #ffeb3b;
+  font-style: italic;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Mic button styling */
+.mic-button {
+  font-size: 4rem;
+  background: #ff4e50;
+  border: none;
+  padding: 20px;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(255, 78, 80, 0.6);
+}
+
+.mic-button:hover {
+  background: #ff7875;
+  transform: scale(1.1);
+}
+
+.mic-button.recording {
+  background: #ffcc00;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 0 20px #ffcc00; }
+  50% { transform: scale(1.1); box-shadow: 0 0 30px #ffcc00; }
+  100% { transform: scale(1); box-shadow: 0 0 20px #ffcc00; }
+}
+
+/* Audio player */
+audio {
+  margin-top: 10px;
+  width: 100%;
+}
