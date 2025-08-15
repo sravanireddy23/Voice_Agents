@@ -14,7 +14,7 @@ This project records your voice, **transcribes**, **responds**, and **plays back
 ✅ **🎨 Modern Design** – Glassmorphic, colorful, and responsive.
 
 ---
-S
+
 ## 🛠 **Tech Stack**
 | Layer | Technology |
 |-------|------------|
