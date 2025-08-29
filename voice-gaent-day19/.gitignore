@@ -1,0 +1,11 @@
+fast
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+.env
+
+uploads
+run_legacy.py
+app.log

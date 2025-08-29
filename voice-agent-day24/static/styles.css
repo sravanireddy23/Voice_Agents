@@ -1,0 +1,81 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #ff6ec4, #7873f5);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  width: 90%;
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2rem;
+  color: #fff;
+}
+
+.input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  resize: none;
+  min-height: 100px;
+  font-size: 1rem;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+select {
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+}
+
+button {
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: #fff;
+  color: #333;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #f0f0f0;
+}
+
+.output-section {
+  margin-top: 20px;
+}
+
+#audioPlayer {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 10px;
+}

@@ -1,0 +1,39 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg, #6dd5ed, #2193b0);
+  color: white;
+  min-height: 100vh;
+  padding: 30px;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.4);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+button {
+  margin: 10px;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#startBtn { background: #4caf50; color: white; }
+#stopBtn { background: #e53935; color: white; }
+
+#transcriptBox {
+  margin-top: 20px;
+  background: white;
+  color: black;
+  padding: 15px;
+  border-radius: 8px;
+  min-height: 100px;
+  text-align: left;
+}

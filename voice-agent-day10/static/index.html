@@ -3,29 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>🎤 Voice Agent AI</title>
+  <title>🎤 Day 24 Voice Agent - Persona</title>
   <link rel="stylesheet" href="/static/styles.css" />
 </head>
 <body>
   <div class="container">
-    <h1>🎤 Voice Agent AI</h1>
+    <h1>🎤 Day 24 Voice Agent</h1>
 
-    <div id="chat-history">
+    <!-- Chat History Card -->
+    <div class="card" id="chat-history">
       <h2>Chat History</h2>
       <div id="history-messages"></div>
     </div>
 
-    <button id="start-record">Start Recording</button>
-    <button id="stop-record" disabled>Stop Recording</button>
+    <!-- Persona Selection Card -->
+    <div class="card controls-card">
+      <div class="dropdowns">
+        <label for="personaSelect">Choose Persona:</label><br>
+        <select id="personaSelect">
+          <option value="neutral">Neutral</option>
+          <option value="pirate">Pirate</option>
+          <option value="cowboy">Cowboy</option>
+          <option value="robot">Robot</option>
+          <option value="teacher">Teacher</option>
+        </select>
+      </div>
 
-    <div id="status"></div>
+      <div class="buttons">
+        <button id="start-record">🎙️ Start Recording</button><br><br>
+        <button id="stop-record" disabled>⏹️ Stop Recording</button>
+      </div>
 
-    <div id="result" class="hidden">
+      <div id="status">Status: Idle</div>
+    </div>
+
+    <!-- Results Card -->
+    <div class="card output-card hidden" id="result">
       <h2>Transcription:</h2>
       <p id="transcription"></p>
 
       <h2>AI Response:</h2>
       <p id="llm-response"></p>
+
+      <h2>Persona Used:</h2>
+      <p id="persona-used"></p>
 
       <h2>Audio Response:</h2>
       <audio id="audio-player" controls></audio>

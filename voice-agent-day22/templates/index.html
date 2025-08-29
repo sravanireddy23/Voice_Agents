@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Futuristic AI Voice Agent</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+/* === Day21 CSS unchanged === */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(-45deg, #ff416c, #ff4b2b, #1fa2ff, #12d8fa);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    overflow: hidden;
+}
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+.chat-container {
+    position: relative;
+    max-width: 700px;
+    width: 95%;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 25px;
+    padding: 2rem;
+    box-shadow: 0 0 30px rgba(255,255,255,0.2), 0 0 60px rgba(0,255,255,0.3);
+    text-align: center;
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+}
+.chat-container::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, #ff416c, #ff4b2b, #1fa2ff, #12d8fa);
+    background-size: 400% 400%;
+    animation: gradientBG 20s ease infinite;
+    filter: blur(100px);
+    z-index: 0;
+}
+.chat-container * {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+}
+.chat-container h4 {
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px #fff, 0 0 20px #ff4ec7;
+}
+.record-wrapper { position: relative; display: inline-block; }
+.record-btn {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ff4ec7, #00f0ff);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 0 20px #ff4ec7, 0 0 40px #00f0ff;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+.record-btn:hover { transform: scale(1.1); }
+.record-btn.recording { animation: pulseNeon 1.2s infinite; }
+.record-wrapper .wave {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    margin-left: -60px;
+    margin-top: -60px;
+    border: 3px solid #00f0ff;
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: wave 1.5s infinite;
+    z-index: 1;
+}
+.record-wrapper .wave:nth-child(2) { animation-delay: 0.3s; }
+.record-wrapper .wave:nth-child(3) { animation-delay: 0.6s; }
+@keyframes wave { 0% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.5); opacity: 0; } 100% { transform: scale(1); opacity: 0.5; } }
+@keyframes pulseNeon { 0% { box-shadow: 0 0 20px #ff4ec7, 0 0 40px #00f0ff; } 50% { box-shadow: 0 0 40px #ff4ec7, 0 0 60px #00f0ff; } 100% { box-shadow: 0 0 20px #ff4ec7, 0 0 40px #00f0ff; } }
+.status-display { font-size: 1.2rem; margin-top: 0.8rem; color: #fff; }
+.transcription-container {
+    margin-top: 2rem;
+    background: rgba(0,0,0,0.4);
+    border-radius: 20px;
+    padding: 1.5rem;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.transcription-text { font-size: 1rem; min-height: 60px; font-style: italic; }
+.transcription-history { margin-top: 1rem; max-height: 200px; overflow-y: auto; }
+.transcription-history-item {
+    background: rgba(255,255,255,0.1);
+    border-left: 4px solid #ff4ec7;
+    border-radius: 12px;
+    padding: 0.6rem 1rem;
+    margin-bottom: 0.6rem;
+    animation: slideIn 0.5s ease forwards;
+}
+.transcription-history-item.assistant { border-left-color: #00f0ff; }
+.history-timestamp { font-size: 0.7rem; color: #ccc; float: right; }
+@keyframes slideIn { from { opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
+.transcription-history::-webkit-scrollbar { width:6px; }
+.transcription-history::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius:10px; }
+audio { display:none; }
+</style>
+</head>
+<body>
+<div class="chat-container">
+    <h4>Futuristic AI Voice Agent</h4>
+    <p class="text-muted">Press the button to start the conversation.</p>
+
+    <div class="record-wrapper">
+        <button id="recordBtn" class="record-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
+                <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z"/>
+                <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
+            </svg>
+        </button>
+        <span class="wave"></span>
+        <span class="wave"></span>
+        <span class="wave"></span>
+    </div>
+
+    <div id="statusDisplay" class="status-display">Ready to chat!</div>
+
+    <div id="transcriptionDisplay" class="transcription-container d-none">
+        <div class="transcription-label text-start">Current Turn:</div>
+        <div id="currentTranscript" class="transcription-text text-start">Waiting for speech...</div>
+
+        <div class="transcription-label text-start mt-3">Transcription History:</div>
+        <div id="transcriptionHistory" class="transcription-history">
+            <div class="text-center" style="font-style: italic; color:#bbb;">Your completed turns will appear here...</div>
+        </div>
+    </div>
+
+    <!-- Audio element for playback -->
+    <audio id="audioPlayer" hidden></audio>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+/* === Day22 JS additions for audio playback === */
+const audioPlayer = document.getElementById("audioPlayer");
+
+// Function to play audio from backend URL
+function playAudio(url) {
+    audioPlayer.src = url;
+    audioPlayer.play().catch(err => console.error("Audio playback failed:", err));
+}
+
+// Example: After receiving JSON from /agent/chat/{session_id}
+// You can call playAudio(audio_url) to play TTS
+// e.g., playAudio("https://yourdomain.com/static/assistant_response.mp3");
+</script>
+<script src="/static/script.js"></script>
+</body>
+</html>
