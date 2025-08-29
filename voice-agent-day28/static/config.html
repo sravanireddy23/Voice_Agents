@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🔑 API Configuration</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🔑 Configure API Keys</h1>
+
+    <form id="config-form">
+      <label for="assemblyai">AssemblyAI Key:</label><br>
+      <input type="text" id="assemblyai" placeholder="Enter AssemblyAI API Key" required /><br><br>
+
+      <label for="murf">Murf API Key:</label><br>
+      <input type="text" id="murf" placeholder="Enter Murf API Key" required /><br><br>
+
+      <label for="google">Google API Key:</label><br>
+      <input type="text" id="google" placeholder="Enter Google API Key" required /><br><br>
+
+      <button type="submit">Save & Continue</button>
+    </form>
+  </div>
+</body>
+</html>
+<script>
+document.getElementById("config-form").addEventListener("submit", function(e){
+  e.preventDefault();
+  localStorage.setItem("assemblyai_key", document.getElementById("assemblyai").value);
+  localStorage.setItem("murf_key", document.getElementById("murf").value);
+  localStorage.setItem("google_key", document.getElementById("google").value);
+  window.location.href = "/static/index.html";
+});
+</script>
+

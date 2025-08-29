@@ -1,140 +1,157 @@
+/* --- Body & Container --- */
 body {
   margin: 0;
-  height: 100vh;
-  font-family: 'Montserrat', sans-serif;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f6d365, #fda085, #a1c4fd, #c2e9fb);
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
 }
 
 .container {
-  background: rgba(0, 0, 0, 0.45);
-  padding: 2.5rem 3rem;
-  border-radius: 20px;
-  max-width: 520px;
   width: 90%;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
+  max-width: 750px;
+  padding: 20px;
 }
 
+/* --- Headings --- */
 h1 {
-  font-weight: 700;
-  font-size: 2.8rem;
-  margin-bottom: 1.5rem;
-  letter-spacing: 1.4px;
-  text-shadow: 0 3px 8px rgba(0,0,0,0.7);
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2.2rem;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
 }
 
+h2 {
+  margin-bottom: 10px;
+  color: #fff;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
+
+/* --- Cards --- */
+.card {
+  padding: 20px;
+  border-radius: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Different gradients for each card */
+#chat-history.card {
+  background: linear-gradient(145deg, #ff9a9e, #fecfef);
+}
+
+.controls-card.card {
+  background: linear-gradient(145deg, #a1c4fd, #c2e9fb);
+}
+
+.output-card.card {
+  background: linear-gradient(145deg, #ffecd2, #fcb69f);
+}
+
+/* Card hover effect */
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+}
+
+/* --- Chat History --- */
+#history-messages {
+  max-height: 220px;
+  overflow-y: auto;
+  background: rgba(255,255,255,0.2);
+  padding: 15px;
+  border-radius: 15px;
+}
+
+/* Scrollbar styling */
+#history-messages::-webkit-scrollbar {
+  width: 8px;
+}
+#history-messages::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.6);
+  border-radius: 10px;
+}
+#history-messages::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.1);
+}
+
+/* --- Buttons --- */
 button {
-  background: #ff4e50;
+  padding: 12px 20px;
+  border-radius: 15px;
   border: none;
-  padding: 0.9rem 2.5rem;
-  margin: 0 0.6rem;
-  border-radius: 30px;
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: white;
+  font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(255, 78, 80, 0.6);
-  transition: background 0.3s ease, transform 0.2s ease;
+  color: #fff;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+  transition: all 0.3s ease;
+  margin-bottom: 10px;
 }
 
-button:hover:enabled {
-  background: #ff7875;
-  transform: scale(1.07);
-  box-shadow: 0 6px 22px rgba(255, 120, 117, 0.9);
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
 }
 
 button:disabled {
-  background: #999;
+  background: rgba(255,255,255,0.4);
   cursor: not-allowed;
-  box-shadow: none;
 }
 
+/* --- Status --- */
 #status {
-  margin: 1.3rem 0;
-  font-style: italic;
-  min-height: 1.6rem;
-  font-weight: 600;
-  color: #ffcc00;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
-}
-
-#result {
-  margin-top: 2.5rem;
-  background: rgba(255, 255, 255, 0.12);
-  padding: 1.8rem 2rem;
-  border-radius: 15px;
-  box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.2);
-  text-align: left;
-}
-
-#result h2 {
-  font-size: 1.35rem;
-  border-bottom: 3px solid #ff4e50;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-#result p {
-  background: rgba(255, 255, 255, 0.25);
-  padding: 1.1rem 1.3rem;
-  border-radius: 12px;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
   font-size: 1.1rem;
-  color: #f0f0f0;
-  min-height: 50px;
-  line-height: 1.5;
-  word-wrap: break-word;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-audio#audio-player {
-  width: 100%;
-  margin-top: 1.2rem;
-  border-radius: 16px;
-  outline: none;
-  box-shadow: 0 4px 18px rgba(255, 78, 80, 0.8);
-}
-
-.hidden {
-  display: none;
-}
-
-/* Chat history container and messages */
-#chat-history {
-  max-height: 300px;
-  overflow-y: auto;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 20px;
-  font-size: 1rem;
+/* --- Persona Dropdown --- */
+.dropdowns {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
-.chat-message {
-  margin-bottom: 10px;
-  padding: 8px 12px;
+.dropdowns label {
+  font-weight: bold;
+  color: #fff;
+}
+
+select {
+  padding: 10px;
   border-radius: 12px;
-  max-width: 80%;
-  word-wrap: break-word;
-  color: white;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  border: none;
+  font-size: 1rem;
+  background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+  color: #fff;
+  width: 100%;
 }
 
-.chat-message.user {
-  background: #ff4e50;
-  align-self: flex-end;
-  margin-left: auto;
+/* --- Output Card --- */
+.output-card p {
+  background: rgba(255,255,255,0.25);
+  padding: 12px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  color: #333;
 }
 
-.chat-message.assistant {
-  background: #2575fc;
-  align-self: flex-start;
-  margin-right: auto;
+#audio-player {
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+/* --- Hidden Class --- */
+.hidden {
+  display: none;
 }
