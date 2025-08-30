@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Day 3 of Voice Agents</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1e1e3f, #4a148c);
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 500px;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #ffd700;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        textarea, select, input[type="range"], button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        textarea {
+            height: 100px;
+            resize: none;
+            background: #2a2a3b;
+            color: #fff;
+        }
+
+        select, input[type="range"] {
+            background: #2a2a3b;
+            color: #fff;
+        }
+
+        button {
+            background: #ffd700;
+            color: #1e1e1e;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #ffc107;
+        }
+
+        .message {
+            margin-top: 10px;
+            color: #76ff03;
+            text-align: center;
+        }
+
+        audio {
+            margin-top: 15px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Day 3: Voice Agent</h1>
+        <form method="post" action="/generate">
+            <textarea name="text" placeholder="Enter your message..." required></textarea>
+
+            <label for="voice">Choose Voice:</label>
+            <select name="voice" id="voice" onchange="updateMoods()" required>
+                {% for v in voices %}
+                <option value="{{ v }}">{{ v }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="mood">Select Mood:</label>
+            <select name="mood" id="mood" required></select>
+
+            <label for="pitch">Pitch Adjustment:</label>
+            <input type="range" name="pitch" min="-30" max="30" value="0" id="pitch">
+
+            <button type="submit">Generate Voice</button>
+        </form>
+
+        {% if message %}
+        <p class="message">{{ message }}</p>
+        {% endif %}
+
+        {% if audio_url %}
+        <audio controls autoplay>
+            <source src="{{ audio_url }}" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+        {% endif %}
+    </div>
+
+    <script>
+        const moods = {{ voices | tojson }};
+        function updateMoods() {
+            const voice = document.getElementById("voice").value;
+            const moodSelect = document.getElementById("mood");
+            moodSelect.innerHTML = "";
+            moods[voice].moods.forEach(m => {
+                const option = document.createElement("option");
+                option.value = m;
+                option.text = m;
+                moodSelect.appendChild(option);
+            });
+        }
+        window.onload = updateMoods;
+    </script>
+</body>
+</html>
