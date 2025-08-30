@@ -1,12 +1,3 @@
-Ah! I see what happened — when you copied it to GitHub, the formatting got a bit messed up. The main issues are:
-
-1. Extra backticks in code blocks (` ```` ` instead of ` ``` `).
-2. Indentation/spacing in folder structure code block.
-3. Some blank lines breaking Markdown sections.
-
-Here’s a **cleaned-up version** that will render correctly on GitHub:
-
-```markdown
 # 30 Days of AI Voice Agents - Day 1
 
 Welcome to **Day 1** of the *30 Days of AI Voice Agents* challenge!  

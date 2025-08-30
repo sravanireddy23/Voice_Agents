@@ -7,18 +7,14 @@
   <link rel="stylesheet" href="/static/styles.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>🎤 Voice Agent AI Day 28</h1>
+  <div class="chat-container">
+    <h1 class="title">🎤 Voice Agent AI</h1>
 
-    <div id="chat-history">
-      <h2>Chat History</h2>
+    <div id="chat-history" class="chat-history">
       <div id="history-messages"></div>
-    </div><br>
+    </div>
 
-    <button id="start-record">Start Recording</button><br>
-    <button id="stop-record" disabled>Stop Recording</button><br>
-
-    <div id="status"></div>
+    <div id="status" class="status"></div>
 
     <div id="result" class="hidden">
       <h2>Transcription:</h2>
@@ -27,12 +23,12 @@
       <h2>AI Response:</h2>
       <p id="llm-response"></p>
 
-      <h2>Audio Response:</h2>
       <audio id="audio-player" controls></audio>
     </div>
+
+    <button id="mic-btn" class="mic-button">🎙️</button>
   </div>
 
   <script src="/static/script.js"></script>
 </body>
 </html>
-

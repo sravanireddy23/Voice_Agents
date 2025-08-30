@@ -1,93 +1,79 @@
-# Day 20: Streaming Text-to-Speech with Murf AI
 
-Welcome to Day 20 of the 30 Days of Voice Agents Challenge\! Today, we're taking a huge leap forward in reducing latency by **streaming the LLM's text response directly to Murf AI for real-time Text-to-Speech (TTS) conversion**.
+# 30 Days of AI Voice Agents | Day 21: Streaming Audio Data to Client
 
-## 🧠 What We Built
+## Overview
+Day 21 focuses on **streaming audio data from the server to the client**. Murf-generated audio (base64) is sent over websockets to the client in real-time. The client accumulates the chunks, laying the groundwork for eventual audio playback in the browser.
 
-  * **Real-Time Text-to-Speech**: Integrated Murf AI's WebSocket API to stream the Large Language Model's (LLM) response for immediate audio conversion as it's being generated.
-  * **Streaming Audio Reception**: The server is now capable of receiving the synthesized audio from Murf AI as a continuous stream of base64 encoded audio chunks.
-  * **Console Output for Audio Stream**: The incoming base64 audio chunks from Murf AI are printed to the server's console, providing real-time verification of the streaming TTS functionality.
-  * **Efficient Context Management**: Implemented a static `context_id` for all Murf AI WebSocket requests. This ensures that a single TTS context is used throughout the session, preventing errors related to context limits.
+---
 
------
+## Features
+- **Websocket Streaming**: Send Murf audio chunks (base64) to the client over a websocket connection.
+- **Chunk Accumulation**: Client accumulates base64 audio chunks in an array.
+- **Server Acknowledgement**: Print acknowledgements in the server console when chunks are received by the client.
+- **UI-Independent**: Audio playback in `<audio>` is not required at this stage.
 
-## 🛠 Tech Stack
+---
 
-The tech stack has been enhanced to support real-time, streaming Text-to-Speech.
+## How It Works
+1. The server receives streaming LLM responses and converts them to audio via Murf.
+2. Base64 audio chunks are sent to the client over a websocket.
+3. The client stores each chunk in an array for future use.
+4. Server prints acknowledgements for each chunk received by the client.
 
-  * **Backend**: `FastAPI`, `uvicorn`, `requests`, `assemblyai`, `google-generativeai` (with streaming), `python-dotenv`, `websockets`
-  * **Frontend**: `HTML`, `Bootstrap`, `JavaScript`, `MediaRecorder` API, `WebSocket API`
-  * **AI APIs**:
-      * **Murf AI (Streaming Text-to-Speech via WebSockets)**
-      * AssemblyAI (Real-Time Speech-to-Text with Turn Detection)
-      * Google Gemini (Streaming Large Language Model)
+---
 
------
+## Usage
+1. Ensure you are on the **streaming** branch:
+```bash
+git checkout streaming
+````
 
-## 🚀 Run the App
+2. Run the FastAPI server:
 
-1.  **Navigate to the project directory:**
-    ```bash
-    cd day-20/
-    ```
-2.  **Install the required dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-3.  **Create a `.env` file** and add your API keys:
-    ```
-    MURF_API_KEY="your_murf_api_key_here"
-    ASSEMBLYAI_API_KEY="your_assemblyai_api_key_here"
-    GEMINI_API_KEY="your_gemini_api_key_here"
-    ```
-4.  **Run the FastAPI server:**
-    ```bash
-    uvicorn main:app --reload
-    ```
-5.  **Open your browser** and visit `http://localhost:8000`. Grant microphone permissions if prompted.
-
------
-
-## 📂 Project Structure
-
-The primary changes are within the `services/llm.py` file to handle the new integration with Murf AI's streaming TTS service.
-
-```
-day-20/
-├── main.py
-├── config.py
-├── services/
-│   └── llm.py        # Updated to stream LLM text to Murf AI via WebSockets
-├── schemas.py
-├── templates/
-│   └── index.html
-├── static/
-│   └── script.js
-├── requirements.txt
-└── .env
+```bash
+uvicorn main:app --reload
 ```
 
------
+3. Connect to the websocket endpoint from your client.
+4. Stream audio from Murf to the client.
+5. Observe acknowledgements printed on the server console.
 
-## ✅ Completed Days
+---
 
-  * **Day 01**: Set up a basic FastAPI server with a Bootstrap UI.
-  * **Day 02**: Created a `/tts` endpoint for Text-to-Speech using Murf AI.
-  * **Day 03**: Built a client-side interface for the TTS endpoint.
-  * **Day 04**: Added a client-side echo bot using the `MediaRecorder` API.
-  * **Day 05**: Implemented server-side audio upload.
-  * **Day 06**: Added Speech-to-Text transcription with AssemblyAI.
-  * **Day 07**: Created a voice-transforming echo bot.
-  * **Day 08**: Integrated the Gemini LLM for intelligent text generation.
-  * **Day 09**: Built a full voice-to-voice conversational agent.
-  * **Day 10**: Implemented chat history for context-aware conversations.
-  * **Day 11**: Added robust error handling and a fallback audio response.
-  * **Day 12**: Revamped the UI for a more streamlined and engaging user experience.
-  * **Day 13**: Created the main project `README.md` file.
-  * **Day 14**: Refactored the codebase into a modular, service-oriented architecture.
-  * **Day 15**: Added a foundational WebSocket endpoint to the server.
-  * **Day 16**: Implemented real-time audio streaming from the client using WebSockets.
-  * **Day 17**: Added real-time transcription with AssemblyAI's Python SDK.
-  * **Day 18**: Implemented turn detection with AssemblyAI to identify when the user has finished speaking.
-  * **Day 19**: Implemented streaming of the LLM's response to the server console.
-  * **Day 20**: Integrated real-time streaming Text-to-Speech with Murf AI.
+## Example Server Code
+
+```python
+from fastapi import FastAPI, WebSocket
+import json
+
+app = FastAPI()
+
+@app.websocket("/ws/audio")
+async def stream_audio_to_client(websocket: WebSocket):
+    await websocket.accept()
+    for base64_chunk in get_murf_audio_chunks():
+        await websocket.send_text(base64_chunk)
+        print("Sent audio chunk to client")
+```
+
+---
+
+## Notes
+
+* Audio is streamed in **real-time** as base64 chunks.
+* The client accumulates chunks for **future playback**.
+* This step enables fully streaming voice interaction between server and client.
+
+---
+
+## Resources
+
+* [FastAPI Websockets](https://fastapi.tiangolo.com/advanced/websockets/)
+* [Murf Websockets API](https://murf.ai/api/docs/text-to-speech/web-sockets)
+
+---
+
+## Author
+
+**Sravani Reddy Gavinolla**
+Computer Science & Engineering Student

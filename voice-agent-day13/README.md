@@ -1,101 +1,120 @@
-# 🎤 **AI Voice Agent – Your Personal Conversational Assistant**
 
-✨ Talk to your AI, hear it reply — powered by **FastAPI**, **AssemblyAI**, **Google Gemini**, and **Murf AI**.  
-This project records your voice, **transcribes**, **responds**, and **plays back AI-generated speech** — all wrapped in a **modern, colorful UI**.
+# 30 Days of AI Voice Agents
 
----
-
-## 🚀 **Key Features**
-✅ **🎙 One-Tap Mic Button** – Tap to start, tap to stop.  
-✅ **💬 Chat History** – Full context-aware conversation log.  
-✅ **🧠 AI Intelligence** – Contextual responses from **Google Gemini**.  
-✅ **📝 Accurate Speech-to-Text** – **AssemblyAI** for clean transcriptions.  
-✅ **🔊 Realistic Text-to-Speech** – **Murf AI** voices for lifelike playback.  
-✅ **🎨 Modern Design** – Glassmorphic, colorful, and responsive.
-
----
-S
-## 🛠 **Tech Stack**
-| Layer | Technology |
-|-------|------------|
-| **Frontend** | HTML5, CSS3, JavaScript |
-| **Backend** | FastAPI (Python) |
-| **STT** | 🎤 [AssemblyAI](https://www.assemblyai.com/) |
-| **LLM** | 🤖 [Google Gemini](https://deepmind.google/technologies/gemini/) |
-| **TTS** | 🔊 [Murf AI](https://murf.ai/) |
-| **Other** | python-dotenv, aiofiles, requests, uvicorn |
+## Overview
+This project is a **multi-day journey** to build a fully functional AI Voice Agent. The agent can record your voice, transcribe it, generate intelligent responses using an LLM, and respond with lifelike speech via **Murf TTS**. Over the 30 days, features such as chat history, error handling, and a polished UI were added to make the agent interactive and production-ready.
 
 ---
 
-## 🏗 **How It Works**
+## Technologies Used
+- **Frontend**: HTML, CSS, JavaScript
+- **Backend**: Python, FastAPI
+- **Voice Transcription (STT)**: AssemblyAI
+- **Text-to-Speech (TTS)**: Murf API
+- **Large Language Model (LLM)**: Google Gemini API
+- **Environment Management**: `.env` for API keys
+- **Optional**: In-memory datastore for chat history
+
+---
+
+## Architecture
 ```
 
-🎙 Speak → 📤 Send to Backend → 📝 Transcribe with AssemblyAI
-→ 🤖 Generate Reply with Gemini → 🔊 Convert to Speech with Murf
-→ 📜 Update Chat History → ▶ Play AI’s Voice
+\[ User Voice Input ]
+↓
+Browser MediaRecorder
+↓
+POST Audio
+↓
+FastAPI Server
+↓
+AssemblyAI Transcription
+↓
+LLM Response
+↓
+Murf TTS
+↓
+Return Audio URL → Browser <audio>
 
+````
 
+---
 
-## ⚙ **Setup Instructions**
+## Features
+- **Voice Recording**: Record audio directly from the browser.
+- **Server-Side Transcription**: Convert audio to text using AssemblyAI.
+- **Conversational AI**: Context-aware responses using Gemini API.
+- **Voice Output**: Murf TTS converts text responses to audio.
+- **Chat History**: Session-based memory to remember previous messages.
+- **Error Handling**: Graceful fallback audio and UI notifications.
+- **Polished UI**: Interactive record button, animations, and clean layout.
 
-### 1️⃣ Clone the Project
+---
+
+## Setup & Running
+1. **Clone the Repository**
 ```bash
 git clone https://github.com/yourusername/voice-agent.git
 cd voice-agent
+````
 
-
-### 2️⃣ Install Dependencies
+2. **Install Dependencies**
 
 ```bash
 pip install -r requirements.txt
+```
 
+3. **Set Environment Variables**
 
-### 3️⃣ Create `.env` File
+```bash
+# AssemblyAI
+export ASSEMBLYAI_API_KEY="your_assemblyai_key"
+# Gemini (LLM)
+export GEMINI_API_KEY="your_gemini_key"
+# Murf TTS
+export MURF_API_KEY="your_murf_key"
+```
 
-```env
-ASSEMBLYAI_API_KEY=your_assemblyai_key
-MURF_API_KEY=your_murf_api_key
-MURF_VOICE_ID=en-US-ken
-GEMINI_API_KEY=your_gemini_api_key
-
-
-### 4️⃣ Run the Server
+4. **Run FastAPI Server**
 
 ```bash
 uvicorn main:app --reload
+```
 
+5. **Open UI**
 
-### 5️⃣ Open in Browser
+```
+http://127.0.0.1:8000/?session_id=<your_session_id>
+```
 
-🔗 **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)**
+---
 
+## Usage
 
+* Click the **Record** button to start interacting with the agent.
+* The agent will respond in Murf-generated audio, maintaining conversation context.
+* The session preserves chat history for multi-turn conversations.
 
-## 📸 **Screenshots**
+---
 
-🖼 **Main Chat Interface**
-![Chat UI](screenshots/chat-ui.png)
+## Screenshots
 
-🖼 **Recording in Progress**
-![Recording](screenshots/recording.png)
+*(Add screenshots of your UI, audio playback, and chat responses here for LinkedIn or documentation.)*
 
-🖼 **AI Reply Playback**
-![AI Reply](screenshots/ai-reply.png)
+---
 
+## Resources
 
+* [FastAPI Documentation](https://fastapi.tiangolo.com/)
+* [AssemblyAI Python SDK](https://github.com/AssemblyAI/assemblyai-python-sdk)
+* [Murf API Documentation](https://murf.ai/api/docs/api-reference/text-to-speech/generate)
+* [Google Gemini API Docs](https://ai.google.dev/gemini-api/docs)
 
-## 🔮 **Future Improvements**
+---
 
-* 🌍 Multi-language support
-* 📱 Mobile-first optimization
-* 🎯 Better context handling
-* 🔒 User authentication
-
-
-## 👩‍💻 **Author**
+## Author
 
 **Sravani Reddy Gavinolla**
-📧 **Email:** [sravanigavinolla@gmail.com](mailto:sravanigavinolla@gmail.com)
-🔗 **LinkedIn:** [Sravani Reddy Gavinolla](https://www.linkedin.com/in/sravani-reddy-gavinolla-14b421331/)
-💻 **GitHub:** [sravanireddy23](https://github.com/sravanireddy23)
+Computer Science & Engineering Student
+
 
